@@ -16,13 +16,9 @@ export default function ProjectsPage() {
   const { user } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (user) {
-      fetchProjects();
-    }
-  }, [user]);
-
   const fetchProjects = async () => {
+    if (!user) return;
+
     try {
       const { data, error } = await supabase
         .from("projects")
@@ -37,6 +33,10 @@ export default function ProjectsPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchProjects();
+  }, [user]);
 
   const handleDelete = async (projectId: string) => {
     if (!confirm("Are you sure you want to delete this project?")) return;

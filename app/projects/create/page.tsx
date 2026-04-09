@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { MainLayout } from "@/components/MainLayout";
 
@@ -13,6 +14,7 @@ export default function CreateProjectPage() {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,8 +23,13 @@ export default function CreateProjectPage() {
     setError(null);
 
     try {
+      if (!user) {
+        throw new Error("You must be signed in to create a project.");
+      }
+
       const { error: insertError } = await supabase.from("projects").insert([
         {
+          user_id: user.id,
           name,
           project_number: projectNumber,
           budget: budget ? parseFloat(budget) : null,
@@ -30,10 +37,19 @@ export default function CreateProjectPage() {
         },
       ]);
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        throw new Error(insertError.message || "Failed to create project");
+      }
+
       router.push("/projects");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create project");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else if (typeof err === "string") {
+        setError(err);
+      } else {
+        setError(JSON.stringify(err) || "Failed to create project");
+      }
     } finally {
       setLoading(false);
     }
