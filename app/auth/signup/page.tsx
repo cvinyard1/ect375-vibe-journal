@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth/AuthContext";
 import Link from "next/link";
 
 export default function SignupPage() {
@@ -11,55 +12,17 @@ export default function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { session, loading: authLoading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    let mounted = true;
-
-    // Check if user is already logged in
-    const checkSession = async () => {
-      try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        console.log("Signup page - Session check:", { session: !!session, error });
-
-        if (!mounted) return;
-
-        if (session && !error) {
-          console.log("User already logged in, redirecting to dashboard");
-          // Add a small delay to ensure the page is visible before redirect
-          setTimeout(() => {
-            if (mounted) {
-              router.push("/dashboard");
-            }
-          }, 100);
-        } else {
-          console.log("No valid session, showing signup form");
-        }
-      } catch (err) {
-        console.error("Session check error:", err);
-      }
-    };
-
-    checkSession();
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log("Auth state change on signup page:", event, { session: !!session });
-      if (event === 'SIGNED_IN' && session && mounted) {
-        // Add a small delay to ensure the page is visible before redirect
-        setTimeout(() => {
-          if (mounted) {
-            router.push("/dashboard");
-          }
-        }, 100);
-      }
-    });
-
-    return () => {
-      mounted = false;
-      subscription?.unsubscribe();
-    };
-  }, [router]);
+    console.log("Signup page - Auth state:", { session: !!session, authLoading });
+    
+    if (!authLoading && session) {
+      console.log("User already logged in, redirecting to dashboard");
+      router.push("/dashboard");
+    }
+  }, [session, authLoading, router]);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,6 +58,30 @@ export default function SignupPage() {
       setLoading(false);
     }
   };
+
+  // Show loading while auth is being checked
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-slate-600">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If user is already logged in, show redirect message
+  if (session) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-slate-600">Redirecting to dashboard...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
