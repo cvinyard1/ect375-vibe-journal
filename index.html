@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-cogs"></i>
+                <span>Material Manager</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link" data-tooltip="Welcome to our system">Home</a></li>
+                <li><a href="#dashboard" class="nav-link" data-tooltip="View your dashboard">Dashboard</a></li>
+                <li><a href="#projects" class="nav-link" data-tooltip="Manage your projects">Projects</a></li>
+                <li><button class="btn btn-primary" data-tooltip="Sign in to your account">Login</button></li>
+                <li><button class="btn btn-secondary" data-tooltip="Create a new account">Sign Up</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Material Management System</h1>
+                <p class="hero-subtitle">Construction material tracking for Union Hospital</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" data-tooltip="Access your account">Get Started</button>
+                    <button class="btn btn-secondary" data-tooltip="Learn more about us">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Track Progress</h3>
+                    <p>Monitor your project materials in real-time</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Dashboard</h2>
+                <p class="section-subtitle">Welcome to the Material Management System</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h3 class="card-title">My Projects</h3>
+                    <p class="card-text">View and manage your construction projects</p>
+                    <button class="btn btn-primary" data-tooltip="Browse your projects">Go to Projects</button>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3 class="card-title">Create New Project</h3>
+                    <p class="card-text">Start tracking materials for a new project</p>
+                    <button class="btn btn-success" data-tooltip="Start a new project">Create Project</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-subtitle">Manage your construction projects efficiently</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Union Hospital Wing A</h3>
+                        <span class="project-number">UH-2024-001</span>
+                    </div>
+                    <p class="project-description">Construction of new hospital wing with advanced medical facilities</p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <span class="stat-number">45</span>
+                            <span class="stat-label">Materials</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">$2.3M</span>
+                            <span class="stat-label">Budget</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <button class="btn btn-outline" data-tooltip="View project details">View Details</button>
+                        <button class="btn btn-danger" data-tooltip="Delete this project">Delete</button>
+                    </div>
+                </div>
+                <!-- More project cards can be added here -->
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary" data-tooltip="Add a new project">Create New Project</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Material Manager</h4>
+                    <p>Efficient construction material tracking system</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Union Hospital Construction Team</p>
+                    <p><i class="fas fa-envelope"></i> contact@unionhospital.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Material Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

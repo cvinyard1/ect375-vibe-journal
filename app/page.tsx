@@ -1,28 +1,26 @@
 export default function Home() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
-      <div className="text-center">
-        <h1 className="text-5xl font-bold text-white mb-4">
-          Material Management System
-        </h1>
-        <p className="text-xl text-slate-300 mb-8">
-          Construction material tracking for Union Hospital
-        </p>
-        <div className="flex gap-4 justify-center">
-          <a
-            href="/auth/login"
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition"
-          >
-            Login
-          </a>
-          <a
-            href="/auth/signup"
-            className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition"
-          >
-            Sign Up
-          </a>
+    <div>
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="hero-container">
+          <div className="hero-content">
+            <h1 className="hero-title">Material Management System</h1>
+            <p className="hero-subtitle">Construction material tracking for Union Hospital</p>
+            <div className="hero-buttons">
+              <a href="/auth/login" className="btn btn-primary" data-tooltip="Access your account">Login</a>
+              <a href="/auth/signup" className="btn btn-secondary" data-tooltip="Create a new account">Sign Up</a>
+            </div>
+          </div>
+          <div className="hero-visual">
+            <div className="floating-card">
+              <i className="fas fa-chart-line"></i>
+              <h3>Track Progress</h3>
+              <p>Monitor your project materials in real-time</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

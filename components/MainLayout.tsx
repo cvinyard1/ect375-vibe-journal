@@ -15,36 +15,37 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="bg-[#6D8196]/95 border-b border-[#FFFFE3]/20 sticky top-0 z-50 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Link href="/dashboard" className="flex items-center gap-2 bubble-ui">
-            <h1 className="text-2xl font-bold text-[#FFFFE3]">Material Manager</h1>
-          </Link>
-
-          <nav className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="/dashboard" className="bubble-ui">
-              Dashboard
-            </Link>
-            <Link href="/projects" className="bubble-ui">
-              Projects
-            </Link>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <span className="text-[#FFFFE3]/90">{user?.email}</span>
+    <div>
+      {/* Navigation */}
+      <nav className="navbar">
+        <div className="nav-container">
+          <div className="nav-brand">
+            <i className="fas fa-cogs"></i>
+            <span>Material Manager</span>
+          </div>
+          <ul className="nav-menu">
+            <li><Link href="/dashboard" className="nav-link" data-tooltip="Welcome to your dashboard">Dashboard</Link></li>
+            <li><Link href="/projects" className="nav-link" data-tooltip="Manage your projects">Projects</Link></li>
+            <li>
+              <span className="text-slate-400">{user?.email}</span>
+            </li>
+            <li>
               <button
                 onClick={handleLogout}
-                className="bubble-ui"
+                className="btn btn-danger"
+                data-tooltip="Sign out of your account"
               >
                 Logout
               </button>
-            </div>
-          </nav>
+            </li>
+          </ul>
         </div>
-      </header>
+      </nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col items-center">{children}</main>
+      <main className="container" style={{ paddingTop: '6rem' }}>
+        {children}
+      </main>
     </div>
   );
 }
