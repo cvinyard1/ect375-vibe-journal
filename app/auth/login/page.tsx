@@ -106,35 +106,6 @@ export default function LoginPage() {
     );
   }
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    console.log("Attempting login for:", email);
-
-    try {
-      const { data, error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      console.log("Login result:", { data: !!data, error: authError });
-
-      if (authError) {
-        setError(authError.message);
-      } else {
-        console.log("Login successful, redirecting...");
-        router.push("/dashboard");
-      }
-    } catch (err) {
-      console.error("Login error:", err);
-      setError("An unexpected error occurred");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl border border-slate-200">

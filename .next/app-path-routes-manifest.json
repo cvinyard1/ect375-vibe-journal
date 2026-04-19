@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/page": "/",
+  "/auth/login/page": "/auth/login",
+  "/auth/signup/page": "/auth/signup",
+  "/dashboard/page": "/dashboard",
+  "/projects/[id]/materials/create/page": "/projects/[id]/materials/create",
+  "/projects/[id]/materials/[materialId]/edit/page": "/projects/[id]/materials/[materialId]/edit",
+  "/projects/[id]/page": "/projects/[id]",
+  "/projects/[id]/materials/page": "/projects/[id]/materials",
+  "/projects/page": "/projects",
+  "/projects/create/page": "/projects/create"
+}
