@@ -1,13 +1,13 @@
 {
   "/_not-found/page": "/_not-found",
   "/auth/signup/page": "/auth/signup",
-  "/auth/login/page": "/auth/login",
   "/dashboard/page": "/dashboard",
+  "/projects/create/page": "/projects/create",
+  "/projects/[id]/materials/create/page": "/projects/[id]/materials/create",
+  "/auth/login/page": "/auth/login",
+  "/projects/[id]/materials/page": "/projects/[id]/materials",
   "/projects/[id]/materials/[materialId]/edit/page": "/projects/[id]/materials/[materialId]/edit",
   "/projects/[id]/page": "/projects/[id]",
-  "/page": "/",
-  "/projects/[id]/materials/page": "/projects/[id]/materials",
-  "/projects/[id]/materials/create/page": "/projects/[id]/materials/create",
   "/projects/page": "/projects",
-  "/projects/create/page": "/projects/create"
+  "/page": "/"
 }

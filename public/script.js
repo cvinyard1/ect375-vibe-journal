@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
       observer.observe(section);
     });
 
-    // Add loading animation to page
-    document.body.classList.add('loaded');
+    // Removed: document.body.classList.add('loaded');
+    // The body should always be visible now
   }
 
   // Initialize tooltips (only on non-auth pages for now)
@@ -145,16 +145,8 @@ style.textContent = `
     transform: translateY(0);
   }
 
-  ${!isAuthPage ? `
-  body {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  body.loaded {
-    opacity: 1;
-  }
-  ` : ''}
+  /* Remove the body opacity animation that causes white flash */
+  /* The body should always be visible */
 `;
 document.head.appendChild(style);
 
