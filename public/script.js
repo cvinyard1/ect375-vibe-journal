@@ -1,5 +1,8 @@
 // script.js - Modern JavaScript for animations and interactivity
 
+// Check if we're on an auth page
+const isAuthPage = window.location.pathname.includes('/auth/');
+
 // Intersection Observer for fade-in animations
 const observerOptions = {
   threshold: 0.1,
@@ -16,20 +19,25 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe all sections and cards for animations
 document.addEventListener('DOMContentLoaded', () => {
-  // Observe sections
-  const sections = document.querySelectorAll('.section, .card, .project-card');
-  sections.forEach(section => {
-    observer.observe(section);
-  });
+  // Only apply animations and fade-in on non-auth pages
+  if (!isAuthPage) {
+    // Observe sections
+    const sections = document.querySelectorAll('.section, .card, .project-card');
+    sections.forEach(section => {
+      observer.observe(section);
+    });
 
-  // Initialize tooltips
-  initTooltips();
+    // Add loading animation to page
+    document.body.classList.add('loaded');
+  }
+
+  // Initialize tooltips (only on non-auth pages for now)
+  if (!isAuthPage) {
+    initTooltips();
+  }
 
   // Smooth scrolling for navigation links
   initSmoothScrolling();
-
-  // Add loading animation to page
-  document.body.classList.add('loaded');
 });
 
 // Tooltip functionality
@@ -137,6 +145,7 @@ style.textContent = `
     transform: translateY(0);
   }
 
+  ${!isAuthPage ? `
   body {
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -145,6 +154,7 @@ style.textContent = `
   body.loaded {
     opacity: 1;
   }
+  ` : ''}
 `;
 document.head.appendChild(style);
 
