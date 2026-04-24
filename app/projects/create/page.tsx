@@ -58,93 +58,94 @@ export default function CreateProjectPage() {
   return (
     <ProtectedRoute>
       <MainLayout>
-        <div className="py-8 max-w-2xl mx-auto">
-          <h1 className="text-4xl font-bold text-white mb-8">Create New Project</h1>
+        <div className="section">
+          <div className="container max-w-2xl mx-auto">
+            <h1 className="section-title text-4xl mb-8">Create New Project</h1>
 
-          <form onSubmit={handleSubmit} className="bg-slate-800 border border-slate-700 rounded-lg p-8 space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
-                Project Name *
-              </label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                placeholder="e.g., Union Hospital Renovation"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="projectNumber" className="block text-sm font-medium text-slate-300 mb-2">
-                Project Number *
-              </label>
-              <input
-                id="projectNumber"
-                type="text"
-                value={projectNumber}
-                onChange={(e) => setProjectNumber(e.target.value)}
-                required
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                placeholder="e.g., UH-2024-001"
-              />
-              <p className="text-xs text-slate-400 mt-1">Used for organization and identification</p>
-            </div>
-
-            <div>
-              <label htmlFor="budget" className="block text-sm font-medium text-slate-300 mb-2">
-                Project Budget (Optional)
-              </label>
-              <input
-                id="budget"
-                type="number"
-                step="0.01"
-                value={budget}
-                onChange={(e) => setBudget(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                placeholder="e.g., 50000"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-2">
-                Description (Optional)
-              </label>
-              <textarea
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={4}
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                placeholder="Add any additional notes or details about the project"
-              />
-            </div>
-
-            {error && (
-              <div className="p-3 bg-red-900/20 border border-red-500/50 rounded-lg text-red-300 text-sm">
-                {error}
+            <form onSubmit={handleSubmit} className="card">
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">
+                  Project Name *
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="form-control"
+                  placeholder="e.g., Union Hospital Renovation"
+                />
               </div>
-            )}
 
-            <div className="flex gap-4">
-              <button
-                type="submit"
-                disabled={loading}
-                className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-600/50 text-white font-semibold rounded-lg transition"
-              >
-                {loading ? "Creating..." : "Create Project"}
-              </button>
-              <button
-                type="button"
-                onClick={() => router.push("/projects")}
-                className="flex-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+              <div className="form-group">
+                <label htmlFor="projectNumber" className="form-label">
+                  Project Number *
+                </label>
+                <input
+                  id="projectNumber"
+                  type="text"
+                  value={projectNumber}
+                  onChange={(e) => setProjectNumber(e.target.value)}
+                  required
+                  className="form-control"
+                  placeholder="e.g., UH-2024-001"
+                />
+                <p className="text-xs text-slate-400 mt-2">Used for organization and identification</p>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="budget" className="form-label">
+                  Project Budget (Optional)
+                </label>
+                <input
+                  id="budget"
+                  type="number"
+                  step="0.01"
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                  className="form-control"
+                  placeholder="e.g., 50000"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="description" className="form-label">
+                  Description (Optional)
+                </label>
+                <textarea
+                  id="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="form-control"
+                  placeholder="Add any additional notes or details about the project"
+                />
+              </div>
+
+              {error && (
+                <div className="form-group p-3 bg-red-900/20 border border-red-500/50 rounded-lg text-red-300 text-sm">
+                  {error}
+                </div>
+              )}
+
+              <div className="flex gap-4 mt-8">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn btn-primary flex-1 justify-center"
+                >
+                  <i className="fas fa-plus"></i> {loading ? "Creating..." : "Create Project"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => router.push("/projects")}
+                  className="btn btn-outline flex-1 justify-center"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </MainLayout>
     </ProtectedRoute>

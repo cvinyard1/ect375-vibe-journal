@@ -41,8 +41,8 @@ export default function ProjectDetailPage() {
     return (
       <ProtectedRoute>
         <MainLayout>
-          <div className="text-center py-12">
-            <div className="text-xl text-slate-300">Loading project...</div>
+          <div className="section text-center py-12">
+            <div className="text-xl text-slate-300"><i className="fas fa-spinner fa-spin"></i> Loading project...</div>
           </div>
         </MainLayout>
       </ProtectedRoute>
@@ -53,7 +53,7 @@ export default function ProjectDetailPage() {
     return (
       <ProtectedRoute>
         <MainLayout>
-          <div className="text-center py-12">
+          <div className="section text-center py-12">
             <div className="text-xl text-slate-300">Project not found</div>
           </div>
         </MainLayout>
@@ -64,65 +64,67 @@ export default function ProjectDetailPage() {
   return (
     <ProtectedRoute>
       <MainLayout>
-        <div className="py-8">
-          <div className="mb-8">
-            <Link
-              href="/projects"
-              className="text-blue-400 hover:text-blue-300 mb-4 inline-block"
-            >
-              ← Back to Projects
-            </Link>
-            <h1 className="text-4xl font-bold text-white">{project.name}</h1>
-            <p className="text-slate-400 text-lg">
-              Project #{project.project_number}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-              <h3 className="text-sm font-medium text-slate-400 mb-2">Project Number</h3>
-              <p className="text-2xl font-bold text-white font-mono">{project.project_number}</p>
+        <div className="section">
+          <div className="container">
+            <div className="mb-8">
+              <Link
+                href="/projects"
+                className="text-blue-400 hover:text-blue-300 mb-4 inline-block transition"
+              >
+                <i className="fas fa-arrow-left"></i> Back to Projects
+              </Link>
+              <h1 className="section-title text-4xl mb-2" style={{margin: 0}}>{project.name}</h1>
+              <p className="text-slate-400 text-lg">
+                Project #{project.project_number}
+              </p>
             </div>
 
-            {project.budget && (
-              <div className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-                <h3 className="text-sm font-medium text-slate-400 mb-2">Budget</h3>
-                <p className="text-2xl font-bold text-green-400">
-                  ${project.budget.toLocaleString()}
-                </p>
+            <div className="grid">
+              <div className="card">
+                <h3 className="text-sm font-medium text-slate-400 mb-2">Project Number</h3>
+                <p className="text-2xl font-bold font-mono text-white">{project.project_number}</p>
+              </div>
+
+              {project.budget && (
+                <div className="card">
+                  <h3 className="text-sm font-medium text-slate-400 mb-2">Budget</h3>
+                  <p className="text-2xl font-bold text-green-400">
+                    ${project.budget.toLocaleString()}
+                  </p>
+                </div>
+              )}
+
+              <div className="card">
+                <h3 className="text-sm font-medium text-slate-400 mb-2">Created</h3>
+                <p className="text-2xl font-bold text-white">{new Date(project.created_at).toLocaleDateString()}</p>
+              </div>
+            </div>
+
+            {project.description && (
+              <div className="card mb-8">
+                <h3 className="card-title mb-2">Description</h3>
+                <p className="card-text mb-0">{project.description}</p>
               </div>
             )}
 
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-              <h3 className="text-sm font-medium text-slate-400 mb-2">Created</h3>
-              <p className="text-lg text-white">{new Date(project.created_at).toLocaleDateString()}</p>
-            </div>
-          </div>
+            <div className="card">
+              <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+                <h2 className="card-title m-0">Materials</h2>
+                <Link
+                  href={`/projects/${projectId}/materials/create`}
+                  className="btn btn-success"
+                >
+                  <i className="fas fa-plus"></i> Add Material
+                </Link>
+              </div>
 
-          {project.description && (
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-8">
-              <h3 className="text-lg font-semibold text-white mb-2">Description</h3>
-              <p className="text-slate-300">{project.description}</p>
-            </div>
-          )}
-
-          <div className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Materials</h2>
               <Link
-                href={`/projects/${projectId}/materials/create`}
-                className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition"
+                href={`/projects/${projectId}/materials`}
+                className="btn btn-primary"
               >
-                + Add Material
+                <i className="fas fa-list"></i> View All Materials
               </Link>
             </div>
-
-            <Link
-              href={`/projects/${projectId}/materials`}
-              className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
-            >
-              View All Materials
-            </Link>
           </div>
         </div>
       </MainLayout>

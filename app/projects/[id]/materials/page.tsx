@@ -74,8 +74,8 @@ export default function MaterialsPage() {
     return (
       <ProtectedRoute>
         <MainLayout>
-          <div className="text-center py-12">
-            <div className="text-xl text-slate-300">Loading...</div>
+          <div className="section text-center py-12">
+            <div className="text-xl text-slate-300"><i className="fas fa-spinner fa-spin"></i> Loading...</div>
           </div>
         </MainLayout>
       </ProtectedRoute>
@@ -86,7 +86,7 @@ export default function MaterialsPage() {
     return (
       <ProtectedRoute>
         <MainLayout>
-          <div className="text-center py-12">
+          <div className="section text-center py-12">
             <div className="text-xl text-slate-300">Project not found</div>
           </div>
         </MainLayout>
@@ -97,102 +97,109 @@ export default function MaterialsPage() {
   return (
     <ProtectedRoute>
       <MainLayout>
-        <div className="py-8">
-          <div className="mb-8">
-            <Link
-              href={`/projects/${projectId}`}
-              className="text-blue-400 hover:text-blue-300 mb-4 inline-block"
-            >
-              ← Back to {project.name}
-            </Link>
-            <h1 className="text-4xl font-bold text-white">Materials</h1>
-          </div>
-
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <p className="text-slate-400">
-                Total Items: <span className="text-white font-bold">{materials.length}</span>
-              </p>
-              {calculateTotalCost() > 0 && (
-                <p className="text-slate-400">
-                  Total Cost: <span className="text-green-400 font-bold">${calculateTotalCost().toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                </p>
-              )}
+        <div className="section">
+          <div className="container">
+            <div className="mb-8">
+              <Link
+                href={`/projects/${projectId}`}
+                className="text-blue-400 hover:text-blue-300 mb-4 inline-block transition"
+              >
+                <i className="fas fa-arrow-left"></i> Back to {project.name}
+              </Link>
+              <h1 className="section-title text-4xl" style={{margin: 0}}>Materials</h1>
             </div>
-            <Link
-              href={`/projects/${projectId}/materials/create`}
-              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition"
-            >
-              + Add Material
-            </Link>
-          </div>
 
-          {materials.length === 0 ? (
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-8 text-center">
-              <h2 className="text-2xl font-bold text-white mb-2">No materials yet</h2>
-              <p className="text-slate-400 mb-6">Start adding materials to track for this project</p>
+            <div className="flex flex-wrap items-center justify-between mb-8 gap-4">
+              <div>
+                <p className="text-slate-400">
+                  Total Items: <span className="text-white font-bold">{materials.length}</span>
+                </p>
+                {calculateTotalCost() > 0 && (
+                  <p className="text-slate-400">
+                    Total Cost: <span className="text-green-400 font-bold">${calculateTotalCost().toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  </p>
+                )}
+              </div>
               <Link
                 href={`/projects/${projectId}/materials/create`}
-                className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+                className="btn btn-success"
               >
-                Add First Material
+                <i className="fas fa-plus"></i> Add Material
               </Link>
             </div>
-          ) : (
-            <div className="overflow-x-auto bg-slate-800 border border-slate-700 rounded-lg">
-              <table className="w-full">
-                <thead className="bg-slate-900 border-b border-slate-700">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">Part #</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">Material Name</th>
-                    <th className="px-6 py-3 text-center text-sm font-semibold text-slate-300">Ordered</th>
-                    <th className="px-6 py-3 text-center text-sm font-semibold text-slate-300">Received</th>
-                    <th className="px-6 py-3 text-center text-sm font-semibold text-slate-300">Needed</th>
-                    <th className="px-6 py-3 text-center text-sm font-semibold text-slate-300">Status</th>
-                    <th className="px-6 py-3 text-right text-sm font-semibold text-slate-300">Unit Price</th>
-                    <th className="px-6 py-3 text-right text-sm font-semibold text-slate-300">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-700">
-                  {materials.map((material) => (
-                    <tr key={material.id} className="hover:bg-slate-700/50 transition">
-                      <td className="px-6 py-4 text-sm font-mono text-slate-300">{material.part_number}</td>
-                      <td className="px-6 py-4 text-sm text-white">{material.material_name}</td>
-                      <td className="px-6 py-4 text-center text-sm text-slate-300">{material.quantity_ordered}</td>
-                      <td className="px-6 py-4 text-center text-sm text-slate-300">{material.quantity_received}</td>
-                      <td className="px-6 py-4 text-center text-sm text-slate-300">{material.quantity_needed}</td>
-                      <td className="px-6 py-4 text-center text-sm">
-                        <span className={`px-2 py-1 rounded text-xs font-semibold ${
-                          material.status === "received" ? "bg-green-900/30 text-green-300" :
-                          material.status === "ordered" ? "bg-blue-900/30 text-blue-300" :
-                          "bg-yellow-900/30 text-yellow-300"
-                        }`}>
-                          {material.status.charAt(0).toUpperCase() + material.status.slice(1)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right text-sm text-slate-300">
-                        {material.unit_price ? `$${material.unit_price.toFixed(2)}` : "—"}
-                      </td>
-                      <td className="px-6 py-4 text-right text-sm space-x-2">
-                        <button
-                          onClick={() => router.push(`/projects/${projectId}/materials/${material.id}/edit`)}
-                          className="px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-xs transition"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(material.id)}
-                          className="px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-xs transition"
-                        >
-                          Delete
-                        </button>
-                      </td>
+
+            {materials.length === 0 ? (
+              <div className="card text-center flex flex-col items-center justify-center p-12">
+                <div className="card-icon mb-6" style={{background: 'linear-gradient(135deg, var(--secondary-color), var(--secondary-hover))'}}>
+                  <i className="fas fa-box-open"></i>
+                </div>
+                <h2 className="card-title">No materials yet</h2>
+                <p className="card-text mb-6">Start adding materials to track for this project</p>
+                <Link
+                  href={`/projects/${projectId}/materials/create`}
+                  className="btn btn-primary"
+                >
+                  <i className="fas fa-plus"></i> Add First Material
+                </Link>
+              </div>
+            ) : (
+              <div className="table-container">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th className="font-mono">Part #</th>
+                      <th>Material Name</th>
+                      <th className="text-center">Ordered</th>
+                      <th className="text-center">Received</th>
+                      <th className="text-center">Needed</th>
+                      <th className="text-center">Status</th>
+                      <th className="text-right">Unit Price</th>
+                      <th className="text-right">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                  </thead>
+                  <tbody>
+                    {materials.map((material) => (
+                      <tr key={material.id}>
+                        <td className="font-mono text-slate-300">{material.part_number}</td>
+                        <td className="text-white">{material.material_name}</td>
+                        <td className="text-center text-slate-300">{material.quantity_ordered}</td>
+                        <td className="text-center text-slate-300">{material.quantity_received}</td>
+                        <td className="text-center text-slate-300">{material.quantity_needed}</td>
+                        <td className="text-center">
+                          <span className={`badge ${
+                            material.status === "received" ? "badge-success" :
+                            material.status === "ordered" ? "badge-primary" :
+                            "badge-warning"
+                          }`}>
+                            {material.status}
+                          </span>
+                        </td>
+                        <td className="text-right text-slate-300 font-mono">
+                          {material.unit_price ? `$${material.unit_price.toFixed(2)}` : "—"}
+                        </td>
+                        <td className="text-right space-x-2">
+                          <button
+                            onClick={() => router.push(`/projects/${projectId}/materials/${material.id}/edit`)}
+                            className="btn btn-outline"
+                            style={{padding: '0.25rem 0.75rem', fontSize: '0.875rem'}}
+                          >
+                            <i className="fas fa-edit"></i>
+                          </button>
+                          <button
+                            onClick={() => handleDelete(material.id)}
+                            className="btn btn-danger"
+                            style={{padding: '0.25rem 0.75rem', fontSize: '0.875rem'}}
+                          >
+                            <i className="fas fa-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
         </div>
       </MainLayout>
     </ProtectedRoute>

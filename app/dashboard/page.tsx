@@ -8,40 +8,48 @@ export default function DashboardPage() {
   return (
     <ProtectedRoute>
       <MainLayout>
-        <div className="py-12">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl font-bold text-white mb-4">Dashboard</h1>
-            <p className="text-slate-300 mb-12">Welcome to the Material Management System</p>
+        <div className="section">
+          <div className="container">
+            <div className="section-header">
+              <h1 className="section-title text-4xl mb-4">Dashboard</h1>
+              <p className="section-subtitle">Welcome to the Material Management System</p>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid">
               {/* Quick Links */}
-              <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-slate-600 transition">
-                <h2 className="text-xl font-bold text-white mb-2">My Projects</h2>
-                <p className="text-slate-400 mb-4">View and manage your construction projects</p>
+              <div className="card">
+                <div className="card-icon">
+                  <i className="fas fa-folder-open"></i>
+                </div>
+                <h2 className="card-title">My Projects</h2>
+                <p className="card-text">View and manage your construction projects</p>
                 <Link
                   href="/projects"
-                  className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+                  className="btn btn-primary"
                 >
-                  Go to Projects
+                  <i className="fas fa-arrow-right"></i> Go to Projects
                 </Link>
               </div>
 
-              <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-slate-600 transition">
-                <h2 className="text-xl font-bold text-white mb-2">Create New Project</h2>
-                <p className="text-slate-400 mb-4">Start tracking materials for a new project</p>
+              <div className="card">
+                <div className="card-icon" style={{background: 'linear-gradient(135deg, var(--success-color), var(--success-hover))'}}>
+                  <i className="fas fa-plus-circle"></i>
+                </div>
+                <h2 className="card-title">Create New Project</h2>
+                <p className="card-text">Start tracking materials for a new project</p>
                 <Link
                   href="/projects/create"
-                  className="inline-block px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition"
+                  className="btn btn-success"
                 >
-                  Create Project
+                  <i className="fas fa-plus"></i> Create Project
                 </Link>
               </div>
             </div>
 
             {/* Assignment 2 Tasks */}
-            <div className="mt-12 bg-slate-800 border border-slate-700 rounded-lg p-6">
-              <h2 className="text-2xl font-bold text-white mb-4">Assignment 2 Tasks</h2>
-              <p className="text-slate-400 mb-4">
+            <div className="card mt-8" style={{animationDelay: "0.4s"}}>
+              <h2 className="card-title mb-4">Assignment 2 Tasks</h2>
+              <p className="card-text mb-4">
                 The app is designed to meet the core Assignment 2 requirements:
               </p>
               <ol className="list-decimal list-inside space-y-3 text-slate-300">

@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth/AuthContext";
-import { useEffect } from "react";
 import Link from "next/link";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { MainLayout } from "@/components/MainLayout";
@@ -55,77 +54,95 @@ export default function ProjectsPage() {
   return (
     <ProtectedRoute>
       <MainLayout>
-        <div className="py-8">
-          <div className="flex items-center justify-between mb-8">
-            <h1 className="text-4xl font-bold text-white">Projects</h1>
-            <Link
-              href="/projects/create"
-              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition"
-            >
-              + New Project
-            </Link>
-          </div>
-
-          {loading ? (
-            <div className="text-center py-12">
-              <div className="text-xl text-slate-300">Loading projects...</div>
-            </div>
-          ) : projects.length === 0 ? (
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-8 text-center">
-              <h2 className="text-2xl font-bold text-white mb-2">No projects yet</h2>
-              <p className="text-slate-400 mb-6">Create your first project to start tracking materials</p>
+        <div className="section">
+          <div className="container">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h1 className="section-title text-4xl mb-2" style={{margin: 0}}>Projects</h1>
+                <p className="text-slate-400">Manage your construction projects efficiently</p>
+              </div>
               <Link
                 href="/projects/create"
-                className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+                className="btn btn-primary"
               >
-                Create First Project
+                <i className="fas fa-plus"></i> New Project
               </Link>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project) => (
-                <div
-                  key={project.id}
-                  className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-slate-600 transition cursor-pointer"
-                  onClick={() => router.push(`/projects/${project.id}`)}
-                >
-                  <h3 className="text-xl font-bold text-white mb-2">{project.name}</h3>
-                  <p className="text-slate-400 text-sm mb-2">
-                    Project #: <span className="font-mono">{project.project_number}</span>
-                  </p>
-                  {project.budget && (
-                    <p className="text-slate-400 text-sm mb-4">
-                      Budget: <span className="text-green-400">${project.budget.toLocaleString()}</span>
-                    </p>
-                  )}
-                  <p className="text-slate-500 text-xs mb-4">
-                    Created: {new Date(project.created_at).toLocaleDateString()}
-                  </p>
 
-                  <div className="flex gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(`/projects/${project.id}`);
-                      }}
-                      className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition"
-                    >
-                      View Materials
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(project.id);
-                      }}
-                      className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded transition"
-                    >
-                      Delete
-                    </button>
-                  </div>
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="text-xl text-slate-300"><i className="fas fa-spinner fa-spin"></i> Loading projects...</div>
+              </div>
+            ) : projects.length === 0 ? (
+              <div className="card text-center flex flex-col items-center justify-center p-12">
+                <div className="card-icon mb-6">
+                  <i className="fas fa-folder-open"></i>
                 </div>
-              ))}
-            </div>
-          )}
+                <h2 className="card-title">No projects yet</h2>
+                <p className="card-text mb-6 max-w-md">Create your first project to start tracking materials</p>
+                <Link
+                  href="/projects/create"
+                  className="btn btn-primary"
+                >
+                  <i className="fas fa-plus"></i> Create First Project
+                </Link>
+              </div>
+            ) : (
+              <div className="grid">
+                {projects.map((project, index) => (
+                  <div
+                    key={project.id}
+                    className="card flex flex-col cursor-pointer"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                    onClick={() => router.push(`/projects/${project.id}`)}
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="card-title m-0 text-xl">{project.name}</h3>
+                      <span className="badge badge-primary font-mono">{project.project_number}</span>
+                    </div>
+                    
+                    <p className="card-text flex-grow">
+                      {project.description ? project.description.substring(0, 100) + (project.description.length > 100 ? '...' : '') : "No description provided."}
+                    </p>
+
+                    <div className="flex flex-wrap gap-4 mb-6">
+                      <div className="flex items-center gap-2">
+                         <i className="fas fa-calendar text-slate-500"></i>
+                         <span className="text-slate-400 text-sm">{new Date(project.created_at).toLocaleDateString()}</span>
+                      </div>
+                      {project.budget && (
+                        <div className="flex items-center gap-2">
+                           <i className="fas fa-coins text-green-500"></i>
+                           <span className="text-green-400 text-sm">${project.budget.toLocaleString()}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex gap-2 mt-auto">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/projects/${project.id}`);
+                        }}
+                        className="btn btn-outline flex-1 justify-center"
+                      >
+                        <i className="fas fa-eye"></i> View
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(project.id);
+                        }}
+                        className="btn btn-danger"
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </MainLayout>
     </ProtectedRoute>

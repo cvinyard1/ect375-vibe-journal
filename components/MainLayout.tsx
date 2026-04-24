@@ -43,7 +43,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
       </nav>
 
       {/* Main Content */}
-      <main className="container" style={{ paddingTop: '6rem' }}>
+      <main className="min-h-screen bg-[var(--bg-color)]" style={{ paddingTop: '5rem' }}>
         {children}
       </main>
     </div>

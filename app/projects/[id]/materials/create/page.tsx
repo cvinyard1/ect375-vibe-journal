@@ -41,23 +41,25 @@ export default function CreateMaterialPage() {
   return (
     <ProtectedRoute>
       <MainLayout>
-        <div className="py-8 max-w-2xl mx-auto">
-          <div className="mb-8">
-            <Link
-              href={`/projects/${projectId}/materials`}
-              className="text-blue-400 hover:text-blue-300 mb-4 inline-block"
-            >
-              ← Back to Materials
-            </Link>
-            <h1 className="text-4xl font-bold text-white">Add New Material</h1>
-          </div>
+        <div className="section">
+          <div className="container max-w-2xl mx-auto">
+            <div className="mb-8">
+              <Link
+                href={`/projects/${projectId}/materials`}
+                className="text-blue-400 hover:text-blue-300 mb-4 inline-block transition"
+              >
+                <i className="fas fa-arrow-left"></i> Back to Materials
+              </Link>
+              <h1 className="section-title text-4xl" style={{margin: 0}}>Add New Material</h1>
+            </div>
 
-          <div className="bg-slate-800 border border-slate-700 rounded-lg p-8">
-            <MaterialForm
-              onSubmit={handleSubmit}
-              isLoading={loading}
-              error={error}
-            />
+            <div className="card">
+              <MaterialForm
+                onSubmit={handleSubmit}
+                isLoading={loading}
+                error={error}
+              />
+            </div>
           </div>
         </div>
       </MainLayout>

@@ -51,10 +51,10 @@ export function MaterialForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="partNumber" className="block text-sm font-medium text-slate-300 mb-2">
+    <form onSubmit={handleSubmit}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{marginBottom: 0}}>
+        <div className="form-group">
+          <label htmlFor="partNumber" className="form-label">
             Part Number *
           </label>
           <input
@@ -63,13 +63,13 @@ export function MaterialForm({
             value={partNumber}
             onChange={(e) => setPartNumber(e.target.value)}
             required
-            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="form-control"
             placeholder="e.g., 12345-RX"
           />
         </div>
 
-        <div>
-          <label htmlFor="materialName" className="block text-sm font-medium text-slate-300 mb-2">
+        <div className="form-group">
+          <label htmlFor="materialName" className="form-label">
             Material Name *
           </label>
           <input
@@ -78,15 +78,15 @@ export function MaterialForm({
             value={materialName}
             onChange={(e) => setMaterialName(e.target.value)}
             required
-            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="form-control"
             placeholder="e.g., Steel Beam 4x6"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div>
-          <label htmlFor="quantityOrdered" className="block text-sm font-medium text-slate-300 mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6" style={{marginBottom: 0}}>
+        <div className="form-group">
+          <label htmlFor="quantityOrdered" className="form-label">
             Quantity Ordered
           </label>
           <input
@@ -95,13 +95,13 @@ export function MaterialForm({
             min="0"
             value={quantityOrdered}
             onChange={(e) => setQuantityOrdered(e.target.value)}
-            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="form-control"
             placeholder="0"
           />
         </div>
 
-        <div>
-          <label htmlFor="quantityReceived" className="block text-sm font-medium text-slate-300 mb-2">
+        <div className="form-group">
+          <label htmlFor="quantityReceived" className="form-label">
             Quantity Received
           </label>
           <input
@@ -110,13 +110,13 @@ export function MaterialForm({
             min="0"
             value={quantityReceived}
             onChange={(e) => setQuantityReceived(e.target.value)}
-            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="form-control"
             placeholder="0"
           />
         </div>
 
-        <div>
-          <label htmlFor="quantityNeeded" className="block text-sm font-medium text-slate-300 mb-2">
+        <div className="form-group">
+          <label htmlFor="quantityNeeded" className="form-label">
             Quantity Needed
           </label>
           <input
@@ -125,22 +125,22 @@ export function MaterialForm({
             min="0"
             value={quantityNeeded}
             onChange={(e) => setQuantityNeeded(e.target.value)}
-            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="form-control"
             placeholder="0"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="status" className="block text-sm font-medium text-slate-300 mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{marginBottom: 0}}>
+        <div className="form-group">
+          <label htmlFor="status" className="form-label">
             Status *
           </label>
           <select
             id="status"
             value={status}
             onChange={(e) => setStatus(e.target.value as "ordered" | "received" | "needed")}
-            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="form-control"
           >
             <option value="needed">Needed</option>
             <option value="ordered">Ordered</option>
@@ -148,8 +148,8 @@ export function MaterialForm({
           </select>
         </div>
 
-        <div>
-          <label htmlFor="unitPrice" className="block text-sm font-medium text-slate-300 mb-2">
+        <div className="form-group">
+          <label htmlFor="unitPrice" className="form-label">
             Unit Price
           </label>
           <input
@@ -159,28 +159,27 @@ export function MaterialForm({
             min="0"
             value={unitPrice}
             onChange={(e) => setUnitPrice(e.target.value)}
-            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="form-control"
             placeholder="e.g., 99.99"
           />
         </div>
       </div>
 
-      <div>
-        <label htmlFor="notes" className="block text-sm font-medium text-slate-300 mb-2">
+      <div className="form-group">
+        <label htmlFor="notes" className="form-label">
           Notes
         </label>
         <textarea
           id="notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          rows={4}
-          className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="form-control"
           placeholder="Add any notes about this material..."
         />
       </div>
 
       {error && (
-        <div className="p-3 bg-red-900/20 border border-red-500/50 rounded-lg text-red-300 text-sm">
+        <div className="form-group p-3 bg-red-900/20 border border-red-500/50 rounded-lg text-red-300 text-sm">
           {error}
         </div>
       )}
@@ -188,9 +187,9 @@ export function MaterialForm({
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-600/50 text-white font-semibold rounded-lg transition"
+        className="btn btn-primary w-full justify-center"
       >
-        {isLoading ? "Saving..." : "Save Material"}
+        <i className="fas fa-save"></i> {isLoading ? "Saving..." : "Save Material"}
       </button>
     </form>
   );

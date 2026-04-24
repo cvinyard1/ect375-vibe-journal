@@ -65,8 +65,8 @@ export default function EditMaterialPage() {
     return (
       <ProtectedRoute>
         <MainLayout>
-          <div className="text-center py-12">
-            <div className="text-xl text-slate-300">Loading material...</div>
+          <div className="section text-center py-12">
+            <div className="text-xl text-slate-300"><i className="fas fa-spinner fa-spin"></i> Loading material...</div>
           </div>
         </MainLayout>
       </ProtectedRoute>
@@ -77,7 +77,7 @@ export default function EditMaterialPage() {
     return (
       <ProtectedRoute>
         <MainLayout>
-          <div className="text-center py-12">
+          <div className="section text-center py-12">
             <div className="text-xl text-slate-300">Material not found</div>
           </div>
         </MainLayout>
@@ -88,25 +88,27 @@ export default function EditMaterialPage() {
   return (
     <ProtectedRoute>
       <MainLayout>
-        <div className="py-8 max-w-2xl mx-auto">
-          <div className="mb-8">
-            <Link
-              href={`/projects/${projectId}/materials`}
-              className="text-blue-400 hover:text-blue-300 mb-4 inline-block"
-            >
-              ← Back to Materials
-            </Link>
-            <h1 className="text-4xl font-bold text-white">Edit Material</h1>
-            <p className="text-slate-400">{material.material_name}</p>
-          </div>
+        <div className="section">
+          <div className="container max-w-2xl mx-auto">
+            <div className="mb-8">
+              <Link
+                href={`/projects/${projectId}/materials`}
+                className="text-blue-400 hover:text-blue-300 mb-4 inline-block transition"
+              >
+                <i className="fas fa-arrow-left"></i> Back to Materials
+              </Link>
+              <h1 className="section-title text-4xl mb-2" style={{margin: 0}}>Edit Material</h1>
+              <p className="text-slate-400 font-mono text-lg">{material.material_name}</p>
+            </div>
 
-          <div className="bg-slate-800 border border-slate-700 rounded-lg p-8">
-            <MaterialForm
-              initialData={material}
-              onSubmit={handleSubmit}
-              isLoading={loading}
-              error={error}
-            />
+            <div className="card">
+              <MaterialForm
+                initialData={material}
+                onSubmit={handleSubmit}
+                isLoading={loading}
+                error={error}
+              />
+            </div>
           </div>
         </div>
       </MainLayout>
