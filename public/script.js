@@ -131,24 +131,22 @@ function initSmoothScrolling() {
   });
 }
 
-// Add CSS for animation trigger
-const style = document.createElement('style');
-style.textContent = `
-  .section, .card, .project-card {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+if (!isAuthPage) {
+  const style = document.createElement('style');
+  style.textContent = `
+    .section, .card, .project-card {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
 
-  .section.animate, .card.animate, .project-card.animate {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Remove the body opacity animation that causes white flash */
-  /* The body should always be visible */
-`;
-document.head.appendChild(style);
+    .section.animate, .card.animate, .project-card.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  `;
+  document.head.appendChild(style);
+}
 
 // Performance optimization: Debounce scroll events
 function debounce(func, wait) {
